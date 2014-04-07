@@ -10,7 +10,7 @@ describe Match do
 
   describe 'winning_move' do
       it 'returns weapon name' do
-        winning_move = Match.new(SCISSORS, PAPER).winning_move()
+        winning_move = Match.new(SCISSORS, PAPER).winning_move
         expect(winning_move).to eql(SCISSORS)
       end
 
