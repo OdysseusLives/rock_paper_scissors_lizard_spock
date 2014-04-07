@@ -6,6 +6,7 @@ describe Match do
   SCISSORS = 'scissors'
   LIZARD = 'lizard'
   SPOCK = 'spock'
+  STALEMATE = 'stalemate'
 
   describe 'winning_move' do
       it 'returns weapon name' do
@@ -23,6 +24,10 @@ describe Match do
 
       it 'uses the maximum number of weapons decide winner' do
         expect(Match.new(SPOCK, SCISSORS).winning_move).to eql(SPOCK)
+      end
+
+      it 'knows when a stalemate is reached' do
+        expect(Match.new(SCISSORS, SCISSORS).winning_move).to eql(STALEMATE)
       end
     end
 

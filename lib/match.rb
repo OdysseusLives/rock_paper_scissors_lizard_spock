@@ -6,6 +6,7 @@ class Match
   end
 
   def winning_move
+    return 'stalemate' if same_weapon?
     aggressor_wins? ? @aggressor : @defender
   end
 
@@ -22,5 +23,9 @@ class Match
 
   def matches_aggressor_pattern?(difference)
     (difference < 0 && difference % 2 == 1) or (difference > 0 && difference % 2 == 0)
+  end
+
+  def same_weapon?
+    @aggressor == @defender
   end
 end
