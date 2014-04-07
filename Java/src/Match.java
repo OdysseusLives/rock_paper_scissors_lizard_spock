@@ -1,13 +1,30 @@
 public class Match {
-    private String aggressor;
-    private String defender;
+    private Weapon aggressor;
+    private Weapon defender;
 
-    public Match(String aggressor, String defender) {
+    public Match(Weapon aggressor, Weapon defender) {
         this.aggressor = aggressor;
         this.defender = defender;
     }
 
-    public String winningMove() {
-        return aggressor;
+    public Weapon winningMove() {
+        if (aggressorWins())
+            return aggressor;
+        else
+            return defender;
+    }
+
+    private boolean aggressorWins() {
+        int aggressorValue = Weapon.getValue(aggressor);
+        int defender_value = Weapon.getValue(defender);
+
+        int difference = aggressorValue - defender_value;
+        int modulus = difference % 2;
+
+        return matchesAggressorPattern(difference, modulus);
+    }
+
+    private boolean matchesAggressorPattern(int difference, int modulus) {
+        return (difference > 0 && modulus == 0) || (difference < 0 && modulus == -1);
     }
 }
