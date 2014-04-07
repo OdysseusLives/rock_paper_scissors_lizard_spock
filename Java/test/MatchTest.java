@@ -17,6 +17,6 @@ public class MatchTest {
 
     @Test
     public void WinningMove_LetsLastWeaponBeatFirstWeapon() {
-        assertThat(new Match(Weapon.ROCK, Weapon.SCISSORS).winningMove(), is(Weapon.ROCK));
+        assertThat(new Match(Weapon.SPOCK, Weapon.SCISSORS).winningMove(), is(Weapon.SPOCK));
     }
 }
