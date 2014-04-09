@@ -1,22 +1,55 @@
+import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 public class MatchTest {
 
-    @Test
-    public void WinningMove_LetsAggressorWin() {
-        assertThat(new Match(Weapon.SCISSORS, Weapon.PAPER).winningMove(), is(Weapon.SCISSORS));
+    private BufferedReader br;
+
+    @Before
+    public void setUp() throws Exception {
+        br = mock(BufferedReader.class);
     }
 
     @Test
-    public void WinningMove_LetsDefenderWin() {
-        assertThat(new Match(Weapon.PAPER, Weapon.SCISSORS).winningMove(), is(Weapon.SCISSORS));
+    public void displaysWeaponChoicesToAUser() throws IOException {
+        when(br.readLine()).thenReturn("rock");
+
+        String matchResults = new Match().run(br);
+
+        assertThat(matchResults.contains("Choices: "), is(true));
     }
 
     @Test
-    public void WinningMove_LetsLastWeaponBeatFirstWeapon() {
-        assertThat(new Match(Weapon.SPOCK, Weapon.SCISSORS).winningMove(), is(Weapon.SPOCK));
+    public void letsPlayerChooseAWeapon() throws IOException {
+        when(br.readLine()).thenReturn("rock");
+
+        new Match().run(br);
+
+        verify(br, times(1)).readLine();
+    }
+
+    @Test
+    public void letsPlayerSeeChoice() throws IOException {
+        when(br.readLine()).thenReturn("rock");
+
+        String matchResults = new Match().run(br);
+
+        assertThat(matchResults.contains("You chose "), is(true));
+    }
+
+    @Test
+    public void returnsWinner() throws IOException {
+        when(br.readLine()).thenReturn("paper");
+
+        String matchResults = new Match().run(br);
+
+        assertThat(matchResults.contains("The winner of ROCK vs PAPER is PAPER"), is(true));
     }
 }

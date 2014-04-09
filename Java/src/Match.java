@@ -1,30 +1,48 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.Arrays;
+
 public class Match {
-    private Weapon aggressor;
-    private Weapon defender;
+    public String run(BufferedReader br) {
+        String results = "";
 
-    public Match(Weapon aggressor, Weapon defender) {
-        this.aggressor = aggressor;
-        this.defender = defender;
+        results += displayWeaponChoices();
+        Weapon weapon = returnWeaponChoice(br);
+        results += displayResults(weapon);
+        return results;
     }
 
-    public Weapon winningMove() {
-        if (aggressorWins())
-            return aggressor;
-        else
-            return defender;
+    private String displayResults(Weapon weapon) {
+        return "You chose " + weapon +
+               "The winner of " + Weapon.ROCK + " vs " + weapon + " is " + Weapon.ROCK.determineWinner(weapon);
     }
 
-    private boolean aggressorWins() {
-        int aggressorValue = Weapon.getValue(aggressor);
-        int defender_value = Weapon.getValue(defender);
-
-        int difference = aggressorValue - defender_value;
-        int modulus = difference % 2;
-
-        return matchesAggressorPattern(difference, modulus);
+    private String displayWeaponChoices() {
+        return "Enter your weapon selection:" +
+               "Choices: " + Arrays.toString(Weapon.values());
     }
 
-    private boolean matchesAggressorPattern(int difference, int modulus) {
-        return (difference > 0 && modulus == 0) || (difference < 0 && modulus == -1);
+    private static Weapon returnWeaponChoice(BufferedReader br) {
+        String weaponChoice = readWeaponChoice(br);
+
+        Weapon weapon = Weapon.ROCK;
+        try {
+            weapon = Weapon.valueOf(weaponChoice.toUpperCase());
+        } catch (Exception e) {
+            System.out.println("Invalid weapon choice!");
+            System.exit(1);
+        }
+        return weapon;
+    }
+
+    private static String readWeaponChoice(BufferedReader br) {
+        String weaponChoice = "";
+        try {
+            weaponChoice = br.readLine();
+        } catch (IOException ioe) {
+            System.out.println("IO error trying to read your weapon!");
+            System.exit(1);
+        }
+        return weaponChoice;
     }
 }
