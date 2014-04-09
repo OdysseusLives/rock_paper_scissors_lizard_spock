@@ -1,4 +1,15 @@
+# JetBrains
 *.iml
-.DS_Store
 .idea
+
+# Mac OS X
+.DS_Store
+
+# Java
+classes
 out
+
+# gradle
+.gradle
+gradle
+build
