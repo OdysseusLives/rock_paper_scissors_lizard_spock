@@ -10,10 +10,21 @@ public class Game {
     }
 
     protected String displayResults(Weapon weapon) {
-        return "You chose " + weapon + "\n" +
-                "The winner of " + Weapon.ROCK +
-                " vs " + weapon +
-                " is " + new Match().determineWinner(Weapon.ROCK, weapon);
+        String message = "You chose " + weapon + "\n";
+        String matchResult = new Match().determineWinner(Weapon.ROCK, weapon);
+        if (matchResult.equals("stalemate"))
+            return message + stalemateResponse();
+        return message + winningResponse(weapon, matchResult);
+    }
+
+    private String winningResponse(Weapon weapon, String matchResult) {
+        return "The winner of " + Weapon.ROCK +
+               " vs " + weapon +
+               " is " + matchResult;
+    }
+
+    private String stalemateResponse() {
+        return "So did your opponent!\nNo one wins.";
     }
 
     protected String displayWeaponChoices() {
