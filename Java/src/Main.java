@@ -5,11 +5,13 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        run();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        run(br);
     }
 
-    public static void run() {
-        Weapon weapon = getPlayerWeapon();
+    public static void run(BufferedReader br) {
+        displayWeaponChoices();
+        Weapon weapon = returnWeaponChoice(br);
         displayResults(weapon);
     }
 
@@ -18,19 +20,17 @@ public class Main {
         System.out.println("The winner of Rock vs " + weapon + " is " + new Match(Weapon.ROCK, weapon).winningMove());
     }
 
-    private static Weapon getPlayerWeapon() {
+    private static void displayWeaponChoices() {
         System.out.println("Enter your weapon selection:");
         System.out.println("Choices: " + Arrays.toString(Weapon.values()));
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        return getWeapon(br);
     }
 
-    private static Weapon getWeapon(BufferedReader br) {
-        String yourWeapon = readWeapon(br);
+    private static Weapon returnWeaponChoice(BufferedReader br) {
+        String weaponChoice = readWeaponChoice(br);
+
         Weapon weapon = Weapon.ROCK;
         try {
-            weapon = Weapon.valueOf(yourWeapon.toUpperCase());
+            weapon = Weapon.valueOf(weaponChoice.toUpperCase());
         } catch (Exception e) {
             System.out.println("Invalid weapon choice!");
             System.exit(1);
@@ -38,14 +38,14 @@ public class Main {
         return weapon;
     }
 
-    private static String readWeapon(BufferedReader br) {
-        String yourWeapon = "";
+    private static String readWeaponChoice(BufferedReader br) {
+        String weaponChoice = "";
         try {
-            yourWeapon = br.readLine();
+            weaponChoice = br.readLine();
         } catch (IOException ioe) {
             System.out.println("IO error trying to read your weapon!");
             System.exit(1);
         }
-        return yourWeapon;
+        return weaponChoice;
     }
 }
