@@ -36,4 +36,7 @@ public enum Weapon {
 
     protected abstract List<Weapon> weaponsThatIBeat();
 
+    public static Weapon getRandomWeapon() {
+        return values()[(int) (Math.random() * values().length)];
+    }
 }

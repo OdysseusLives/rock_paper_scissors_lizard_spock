@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 public class WeaponTest {
@@ -55,4 +56,8 @@ public class WeaponTest {
         assertThat(Weapon.LIZARD.determineWinner(Weapon.SPOCK), is(Weapon.LIZARD));
     }
 
+    @Test
+    public void getRandomWeapon() {
+        assertThat(Weapon.getRandomWeapon(), is(notNullValue(Weapon.class)));
+    }
 }

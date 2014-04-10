@@ -1,30 +1,15 @@
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.Arrays;
 
 public class Game {
-    public void run(BufferedReader br) {
+    Player person = new Player();
+    Player machine = new Player();
+
+    public void play() {
         System.out.println(displayWeaponChoices());
-        Weapon weapon = returnWeaponChoice(br);
-        System.out.println(displayResults(weapon));
-    }
-
-    protected String displayResults(Weapon weapon) {
-        String message = "You chose " + weapon + "\n";
-        String matchResult = new Match().determineWinner(Weapon.ROCK, weapon);
-        if (matchResult.equals("stalemate"))
-            return message + stalemateResponse();
-        return message + winningResponse(weapon, matchResult);
-    }
-
-    private String winningResponse(Weapon weapon, String matchResult) {
-        return "The winner of " + Weapon.ROCK +
-               " vs " + weapon +
-               " is " + matchResult;
-    }
-
-    private String stalemateResponse() {
-        return "So did your opponent!\nNo one wins.";
+        person.chooseWeapon();
+        machine.generateWeapon();
+        Match match = new Match(person.getWeapon(), machine.getWeapon());
+        System.out.println(displayResults(match));
     }
 
     protected String displayWeaponChoices() {
@@ -32,27 +17,22 @@ public class Game {
                 "Choices: " + Arrays.toString(Weapon.values());
     }
 
-    protected Weapon returnWeaponChoice(BufferedReader br) {
-        String weaponChoice = readWeaponChoice(br);
+    protected String displayResults(Match match) {
+        String message = "You chose " + match.getAggressor() + "\n";
+        String matchResult = new Match(match.getAggressor(), match.getDefender()).determineWinner();
 
-        Weapon weapon = Weapon.ROCK;
-        try {
-            weapon = Weapon.valueOf(weaponChoice.toUpperCase());
-        } catch (Exception e) {
-            System.out.println("Invalid weapon choice!");
-            System.exit(1);
-        }
-        return weapon;
+        if (matchResult.equals("stalemate"))
+            return message + stalemateResponse();
+        return message + winningResponse(match, matchResult);
     }
 
-    protected String readWeaponChoice(BufferedReader br) {
-        String weaponChoice = "";
-        try {
-            weaponChoice = br.readLine();
-        } catch (IOException ioe) {
-            System.out.println("IO error trying to read your weapon!");
-            System.exit(1);
-        }
-        return weaponChoice;
+    private String winningResponse(Match match, String matchResult) {
+        return "The winner of " + match.getAggressor() +
+                " vs " + match.getDefender() +
+                " is " + matchResult;
+    }
+
+    private String stalemateResponse() {
+        return "So did your opponent!\nNo one wins.";
     }
 }
