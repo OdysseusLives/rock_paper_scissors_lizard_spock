@@ -4,7 +4,7 @@ public class Game {
     Player person = new Player();
     Player machine = new Player();
 
-    public void play() {
+    public void play() throws Exception {
         System.out.println(displayWeaponChoices());
         person.chooseWeapon();
         machine.generateWeapon();

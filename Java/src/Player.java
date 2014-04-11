@@ -13,33 +13,25 @@ public class Player {
         this.setWeapon(Weapon.getRandomWeapon());
     }
 
-    public void chooseWeapon() {
+    public void chooseWeapon() throws Exception {
         br = new BufferedReader(new InputStreamReader(System.in));
-        setWeapon(returnWeaponChoice(br));
+        setWeapon(returnWeaponChoice(readWeaponChoice(br)));
     }
 
-    protected Weapon returnWeaponChoice(BufferedReader br) {
-        String weaponChoice = readWeaponChoice(br);
-
-        Weapon weapon = Weapon.ROCK;
+    protected Weapon returnWeaponChoice(String weaponChoice) throws Exception {
         try {
-            weapon = Weapon.valueOf(weaponChoice.toUpperCase());
+            return Weapon.valueOf(weaponChoice.toUpperCase());
         } catch (Exception e) {
-            System.out.println("Invalid weapon choice!");
-            System.exit(1);
+            throw new Exception("Invalid weapon choice!");
         }
-        return weapon;
     }
 
-    protected String readWeaponChoice(BufferedReader br) {
-        String weaponChoice = "";
+    protected String readWeaponChoice(BufferedReader br) throws IOException {
         try {
-            weaponChoice = br.readLine();
+            return br.readLine();
         } catch (IOException ioe) {
-            System.out.println("IO error trying to read your weapon!");
-            System.exit(1);
+            throw new IOException("IO error trying to read your weapon!");
         }
-        return weaponChoice;
     }
 
 }

@@ -1,7 +1,8 @@
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -9,6 +10,9 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class PlayerTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void aPlayerKnowsTheirCurrentWeapon() {
         Player player = new Player();
@@ -24,7 +28,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void readWeaponChoice_ReadsInAPlayersChosenWeapon() throws IOException {
+    public void readWeaponChoice_ReadsInAPlayersChosenWeapon() throws Exception {
         BufferedReader br = mock(BufferedReader.class);
         when(br.readLine()).thenReturn("paper");
         new Player().readWeaponChoice(br);
@@ -32,7 +36,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void readWeaponChoice_letsPlayerInputAWeapon() throws IOException {
+    public void readWeaponChoice_letsPlayerInputAWeapon() throws Exception {
         BufferedReader br = mock(BufferedReader.class);
         when(br.readLine()).thenReturn("paper");
 
@@ -42,12 +46,17 @@ public class PlayerTest {
     }
 
     @Test
-    public void returnWeaponChoice_letsPlayerChooseAWeapon() throws IOException {
-        BufferedReader br = mock(BufferedReader.class);
-        when(br.readLine()).thenReturn("paper");
-
+    public void returnWeaponChoice_letsPlayerChooseAWeapon() throws Exception {
         Player player = new Player();
-        assertThat(player.returnWeaponChoice(br), is(Weapon.PAPER));
+        assertThat(player.returnWeaponChoice("paper"), is(Weapon.PAPER));
+    }
+
+    @Test
+    public void returnWeaponChoice_returnsErrorWhenInvalidWeaponIsEntered() throws Exception {
+        thrown.expect(Exception.class);
+        thrown.expectMessage("Invalid weapon choice!");
+
+        new Player().returnWeaponChoice("giraffe");
     }
 
 }
