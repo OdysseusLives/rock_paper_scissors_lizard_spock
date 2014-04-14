@@ -13,12 +13,12 @@ public class Player {
         this.setWeapon(Weapon.getRandomWeapon());
     }
 
-    public void chooseWeapon() throws Exception {
+    public void chooseWeapon() throws IOException {
         br = new BufferedReader(new InputStreamReader(System.in));
         setWeapon(returnWeaponChoice(readWeaponChoice(br)));
     }
 
-    protected Weapon returnWeaponChoice(String weaponChoice) throws EnumConstantNotPresentException {
+    protected Weapon returnWeaponChoice(String weaponChoice)  {
         try {
             return Weapon.valueOf(weaponChoice.toUpperCase());
         } catch (Exception e) {

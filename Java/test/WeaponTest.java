@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -59,5 +60,15 @@ public class WeaponTest {
     @Test
     public void getRandomWeapon() {
         assertThat(Weapon.getRandomWeapon(), is(notNullValue(Weapon.class)));
+    }
+
+    @Test
+    public void displaysWeaponChoicesToAUser() {
+        assertThat(Weapon.choices(), containsString("Choices: "));
+        assertThat(Weapon.choices(), containsString(Weapon.ROCK.toString()));
+        assertThat(Weapon.choices(), containsString(Weapon.PAPER.toString()));
+        assertThat(Weapon.choices(), containsString(Weapon.SCISSORS.toString()));
+        assertThat(Weapon.choices(), containsString(Weapon.LIZARD.toString()));
+        assertThat(Weapon.choices(), containsString(Weapon.SPOCK.toString()));
     }
 }

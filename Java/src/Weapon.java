@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -38,5 +39,10 @@ public enum Weapon {
 
     public static Weapon getRandomWeapon() {
         return values()[(int) (Math.random() * values().length)];
+    }
+
+    public static String choices() {
+        return "Enter your weapon selection:" + "\n" +
+                "Choices: " + Arrays.toString(Weapon.values());
     }
 }

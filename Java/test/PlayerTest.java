@@ -47,12 +47,12 @@ public class PlayerTest {
     }
 
     @Test
-    public void readWeaponChoice_throwsExcecptionWithIOError() throws IOException {
+    public void readWeaponChoice_throwsExceptionWithIOError() throws IOException {
         thrown.expect(IOException.class);
         thrown.expectMessage("IO error trying to read your weapon!");
 
         BufferedReader br = mock(BufferedReader.class);
-        when(br.readLine()).thenThrow(EnumConstantNotPresentException.class);
+        when(br.readLine()).thenThrow(IOException.class);
 
         new Player().readWeaponChoice(br);
     }
