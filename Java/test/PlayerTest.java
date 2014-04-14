@@ -3,6 +3,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -46,14 +47,25 @@ public class PlayerTest {
     }
 
     @Test
+    public void readWeaponChoice_throwsExcecptionWithIOError() throws IOException {
+        thrown.expect(IOException.class);
+        thrown.expectMessage("IO error trying to read your weapon!");
+
+        BufferedReader br = mock(BufferedReader.class);
+        when(br.readLine()).thenThrow(EnumConstantNotPresentException.class);
+
+        new Player().readWeaponChoice(br);
+    }
+
+    @Test
     public void returnWeaponChoice_letsPlayerChooseAWeapon() throws Exception {
         Player player = new Player();
         assertThat(player.returnWeaponChoice("paper"), is(Weapon.PAPER));
     }
 
     @Test
-    public void returnWeaponChoice_returnsErrorWhenInvalidWeaponIsEntered() throws Exception {
-        thrown.expect(Exception.class);
+    public void returnWeaponChoice_throwsExceptionWhenInvalidWeaponIsEntered() throws EnumConstantNotPresentException {
+        thrown.expect(EnumConstantNotPresentException.class);
         thrown.expectMessage("Invalid weapon choice!");
 
         new Player().returnWeaponChoice("giraffe");

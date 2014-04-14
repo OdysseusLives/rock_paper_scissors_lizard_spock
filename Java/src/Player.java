@@ -18,11 +18,11 @@ public class Player {
         setWeapon(returnWeaponChoice(readWeaponChoice(br)));
     }
 
-    protected Weapon returnWeaponChoice(String weaponChoice) throws Exception {
+    protected Weapon returnWeaponChoice(String weaponChoice) throws EnumConstantNotPresentException {
         try {
             return Weapon.valueOf(weaponChoice.toUpperCase());
         } catch (Exception e) {
-            throw new Exception("Invalid weapon choice!");
+            throw new EnumConstantNotPresentException(Weapon.class, "Invalid weapon choice!");
         }
     }
 
