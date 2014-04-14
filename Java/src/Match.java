@@ -10,25 +10,23 @@ public class Match {
         this.machineWeapon = machineWeapon;
     }
 
-    protected String determineWinner() {
-        if (personWeapon.equals(machineWeapon))
-            return "stalemate";
-        return personWeapon.determineWinner(machineWeapon).toString();
+    protected boolean isAStalemate() {
+        return personWeapon.equals(machineWeapon);
     }
 
     public String results() {
         String message = "You chose " + personWeapon + ".\n";
-        String winner = determineWinner();
-        if (winner.equals("stalemate"))
+        if (isAStalemate())
             return message + stalemateMessage();
-        return message + winningMessage(winner);
+        return message + winningMessage();
     }
 
     private String stalemateMessage() {
         return "So did your opponent!\nNo one wins.";
     }
 
-    private String winningMessage(String winner) {
-        return "The winner of " + personWeapon + " vs " + machineWeapon + " is " + winner;
+    private String winningMessage() {
+        return personWeapon.attack(machineWeapon) + "\n" +
+                personWeapon.determineWinner(machineWeapon) + " wins.";
     }
 }
