@@ -18,6 +18,7 @@ public class PlayerTest {
     public void aPlayerKnowsTheirCurrentWeapon() {
         Player player = new Player();
         player.setWeapon(Weapon.SCISSORS);
+
         assertThat(player.getWeapon(), is(Weapon.SCISSORS));
     }
 
@@ -25,50 +26,55 @@ public class PlayerTest {
     public void aPlayerCanGenerateAWeapon() {
         Player player = new Player();
         player.generateWeapon();
+
         assertThat(player.getWeapon(), is(notNullValue(Weapon.class)));
     }
 
     @Test
-    public void readWeaponChoice_ReadsInAPlayersChosenWeapon() throws Exception {
-        BufferedReader br = mock(BufferedReader.class);
-        when(br.readLine()).thenReturn("paper");
-        new Player().readWeaponChoice(br);
-        verify(br, times(1)).readLine();
-    }
-
-    @Test
-    public void readWeaponChoice_letsPlayerInputAWeapon() throws Exception {
+    public void readsInAPlayersChosenWeapon() throws Exception {
         BufferedReader br = mock(BufferedReader.class);
         when(br.readLine()).thenReturn("paper");
 
         Player player = new Player();
+        player.chooseWeapon(br);
 
-        assertThat(player.readWeaponChoice(br), is("paper"));
+        verify(br, times(1)).readLine();
     }
 
     @Test
-    public void readWeaponChoice_throwsExceptionWithIOError() throws IOException {
+    public void letsPlayerInputAWeapon() throws IOException {
+        BufferedReader br = mock(BufferedReader.class);
+        when(br.readLine()).thenReturn("paper");
+
+        Player player = new Player();
+        player.chooseWeapon(br);
+
+        assertThat(player.getWeapon(), is(Weapon.PAPER));
+    }
+
+    @Test
+    public void throwsExceptionWithIOError() throws IOException {
         thrown.expect(IOException.class);
         thrown.expectMessage("IO error trying to read your weapon!");
 
         BufferedReader br = mock(BufferedReader.class);
         when(br.readLine()).thenThrow(IOException.class);
 
-        new Player().readWeaponChoice(br);
-    }
-
-    @Test
-    public void returnWeaponChoice_letsPlayerChooseAWeapon() throws Exception {
         Player player = new Player();
-        assertThat(player.returnWeaponChoice("paper"), is(Weapon.PAPER));
+        player.chooseWeapon(br);
     }
 
+
     @Test
-    public void returnWeaponChoice_throwsExceptionWhenInvalidWeaponIsEntered() throws EnumConstantNotPresentException {
+    public void throwsExceptionWhenInvalidWeaponIsEntered() throws EnumConstantNotPresentException, IOException {
         thrown.expect(EnumConstantNotPresentException.class);
         thrown.expectMessage("Invalid weapon choice!");
 
-        new Player().returnWeaponChoice("giraffe");
+        BufferedReader br = mock(BufferedReader.class);
+        when(br.readLine()).thenReturn("giraffe");
+
+        Player player = new Player();
+        player.chooseWeapon(br);
     }
 
 }

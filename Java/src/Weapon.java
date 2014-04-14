@@ -74,26 +74,26 @@ public enum Weapon {
         }
     };
 
+    public static String choices() {
+        return "Enter your weapon selection:" + "\n" +
+                "Choices: " + Arrays.toString(Weapon.values());
+    }
+
+    public static Weapon getRandomWeapon() {
+        return values()[(int) (Math.random() * values().length)];
+    }
+
     public Weapon determineWinner(Weapon weapon){
         if (weaponsThatIBeat().contains(weapon))
             return this;
         return weapon;
     }
 
-    protected abstract List<Weapon> weaponsThatIBeat();
-
-    public static Weapon getRandomWeapon() {
-        return values()[(int) (Math.random() * values().length)];
-    }
-
-    public static String choices() {
-        return "Enter your weapon selection:" + "\n" +
-                "Choices: " + Arrays.toString(Weapon.values());
-    }
-
     public String attack(Weapon weapon) {
         return String.format("%s %s %s.", this, technique().get(weapon), weapon);
     }
+
+    protected abstract List<Weapon> weaponsThatIBeat();
 
     protected abstract Map<Weapon, String> technique();
 }
