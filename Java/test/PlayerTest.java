@@ -1,3 +1,4 @@
+import factory.WeaponType;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -17,9 +18,9 @@ public class PlayerTest {
     @Test
     public void aPlayerKnowsTheirCurrentWeapon() {
         Player player = new Player();
-        player.setWeapon(Weapon.SCISSORS);
+        player.setWeaponType(WeaponType.SCISSORS);
 
-        assertThat(player.getWeapon(), is(Weapon.SCISSORS));
+        assertThat(player.getWeaponType(), is(WeaponType.SCISSORS));
     }
 
     @Test
@@ -27,7 +28,7 @@ public class PlayerTest {
         Player player = new Player();
         player.generateWeapon();
 
-        assertThat(player.getWeapon(), is(notNullValue(Weapon.class)));
+        assertThat(player.getWeaponType(), is(notNullValue(WeaponType.class)));
     }
 
     @Test
@@ -49,7 +50,7 @@ public class PlayerTest {
         Player player = new Player();
         player.chooseWeapon(br);
 
-        assertThat(player.getWeapon(), is(Weapon.PAPER));
+        assertThat(player.getWeaponType(), is(WeaponType.PAPER));
     }
 
     @Test

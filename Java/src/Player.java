@@ -5,14 +5,15 @@ import java.io.IOException;
 
 @Data
 public class Player {
-    private Weapon weapon;
+    Weapon weapon;
+    BufferedReader br;
 
     public void generateWeapon() {
         this.setWeapon(Weapon.getRandomWeapon());
     }
 
     public void chooseWeapon(BufferedReader bufferedReader) throws IOException {
-        setWeapon(returnWeaponChoice(readWeaponChoice(bufferedReader)));
+        setWeapon(returnWeaponChoice(readWeaponChoice(br)));
     }
 
     private Weapon returnWeaponChoice(String weaponChoice)  {
@@ -23,9 +24,9 @@ public class Player {
         }
     }
 
-    private String readWeaponChoice(BufferedReader bufferedReader) throws IOException {
+    private String readWeaponChoice(BufferedReader br) throws IOException {
         try {
-            return bufferedReader.readLine();
+            return br.readLine();
         } catch (IOException ioe) {
             throw new IOException("IO error trying to read your weapon!");
         }
