@@ -3,22 +3,16 @@ package factory.weaponTypes;
 import factory.Weapon;
 import factory.WeaponType;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import static java.util.Arrays.asList;
 
 public class Scissors extends Weapon {
 
-    private WeaponType thisWeaponType = WeaponType.SCISSORS;
-
-    public WeaponType determineWinner(WeaponType weaponType){
-        return determineWinner(thisWeaponType, weaponType);
-    }
-
-    public String attack(WeaponType weaponType) {
-        return attack(thisWeaponType, weaponType);
+    public WeaponType thisWeaponType() {
+        return WeaponType.SCISSORS;
     }
 
     protected List<WeaponType> weaponsThatIBeat() {
@@ -26,7 +20,7 @@ public class Scissors extends Weapon {
     }
 
     protected Map<WeaponType, String> technique() {
-        Map<WeaponType, String> destruction = new TreeMap<>();
+        Map<WeaponType, String> destruction = new HashMap<>();
         destruction.put(WeaponType.PAPER, "cut");
         destruction.put(WeaponType.ROCK, "is crushed by");
         destruction.put(WeaponType.LIZARD, "decapitate");

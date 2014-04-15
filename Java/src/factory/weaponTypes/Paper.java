@@ -10,18 +10,12 @@ import java.util.TreeMap;
 import static java.util.Arrays.asList;
 
 public class Paper extends Weapon {
-    private WeaponType thisWeaponType = WeaponType.PAPER;
-
-    public WeaponType determineWinner(WeaponType weaponType){
-        return determineWinner(thisWeaponType, weaponType);
+    public WeaponType thisWeaponType() {
+        return WeaponType.PAPER;
     }
 
     protected List<WeaponType> weaponsThatIBeat() {
         return asList(WeaponType.ROCK, WeaponType.SPOCK);
-    }
-
-    public String attack(WeaponType weaponType) {
-        return attack(thisWeaponType, weaponType);
     }
 
     protected Map<WeaponType, String> technique() {

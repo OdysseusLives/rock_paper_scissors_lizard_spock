@@ -58,5 +58,4 @@ public class ScissorsTest {
         assertThat(scissors.attack(WeaponType.SPOCK), is("SCISSORS is smashed by SPOCK."));
     }
 
-
 }

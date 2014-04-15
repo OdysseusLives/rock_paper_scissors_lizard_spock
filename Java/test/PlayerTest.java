@@ -1,3 +1,5 @@
+import factory.Weapon;
+import factory.WeaponFactory;
 import factory.WeaponType;
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,9 +20,8 @@ public class PlayerTest {
     @Test
     public void aPlayerKnowsTheirCurrentWeapon() {
         Player player = new Player();
-        player.setWeaponType(WeaponType.SCISSORS);
-
-        assertThat(player.getWeaponType(), is(WeaponType.SCISSORS));
+        player.setWeapon(WeaponFactory.buildWeapon(WeaponType.SCISSORS));
+        assertThat(player.getWeapon().thisWeaponType(), is(WeaponType.SCISSORS));
     }
 
     @Test
@@ -28,7 +29,7 @@ public class PlayerTest {
         Player player = new Player();
         player.generateWeapon();
 
-        assertThat(player.getWeaponType(), is(notNullValue(WeaponType.class)));
+        assertThat(player.getWeapon(), is(notNullValue(Weapon.class)));
     }
 
     @Test
@@ -50,7 +51,7 @@ public class PlayerTest {
         Player player = new Player();
         player.chooseWeapon(br);
 
-        assertThat(player.getWeaponType(), is(WeaponType.PAPER));
+        assertThat(player.getWeapon().thisWeaponType(), is(WeaponType.PAPER));
     }
 
     @Test

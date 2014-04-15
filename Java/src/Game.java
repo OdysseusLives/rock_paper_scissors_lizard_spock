@@ -1,3 +1,5 @@
+import factory.WeaponType;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -19,7 +21,7 @@ public class Game {
     }
 
     protected String displayWeaponChoices() {
-        return Weapon.choices();
+        return WeaponType.choices();
     }
 
 }

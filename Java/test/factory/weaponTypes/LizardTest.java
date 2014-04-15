@@ -10,7 +10,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class LizardTest {
-    Weapon lizard;
+    private Weapon lizard;
+
     @Before
     public void setUp() throws Exception {
         lizard = WeaponFactory.buildWeapon(WeaponType.LIZARD);

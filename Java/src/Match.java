@@ -1,3 +1,4 @@
+import factory.Weapon;
 import lombok.Data;
 
 @Data
@@ -12,18 +13,18 @@ public class Match {
     }
 
     public String results() {
-        String message = "You chose " + personWeapon + ".\n";
+        String message = "You chose " + personWeapon.thisWeaponType() + ".\n";
         if (isAStalemate())
             return message + STALEMATE;
         return message + winningMessage();
     }
 
     private boolean isAStalemate() {
-        return personWeapon.equals(machineWeapon);
+        return personWeapon.thisWeaponType().equals(machineWeapon.thisWeaponType());
     }
 
     private String winningMessage() {
-        return personWeapon.attack(machineWeapon) + "\n" +
-                personWeapon.determineWinner(machineWeapon) + " wins.";
+        return personWeapon.attack(machineWeapon.thisWeaponType()) + "\n" +
+                personWeapon.determineWinner(machineWeapon.thisWeaponType()) + " wins.";
     }
 }

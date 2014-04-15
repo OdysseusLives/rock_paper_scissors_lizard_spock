@@ -1,3 +1,6 @@
+import factory.Weapon;
+import factory.WeaponFactory;
+import factory.WeaponType;
 import lombok.Data;
 
 import java.io.BufferedReader;
@@ -6,27 +9,27 @@ import java.io.IOException;
 @Data
 public class Player {
     Weapon weapon;
-    BufferedReader br;
 
     public void generateWeapon() {
-        this.setWeapon(Weapon.getRandomWeapon());
+        this.setWeapon(WeaponFactory.buildWeapon(WeaponType.getRandomWeapon()));
     }
 
     public void chooseWeapon(BufferedReader bufferedReader) throws IOException {
-        setWeapon(returnWeaponChoice(readWeaponChoice(br)));
+        setWeapon(returnWeaponChoice(readWeaponChoice(bufferedReader)));
     }
 
     private Weapon returnWeaponChoice(String weaponChoice)  {
         try {
-            return Weapon.valueOf(weaponChoice.toUpperCase());
+            WeaponType weaponType = WeaponType.valueOf(weaponChoice.toUpperCase());
+            return WeaponFactory.buildWeapon(weaponType);
         } catch (Exception e) {
-            throw new EnumConstantNotPresentException(Weapon.class, "Invalid weapon choice!");
+            throw new EnumConstantNotPresentException(WeaponType.class, "Invalid weapon choice!");
         }
     }
 
-    private String readWeaponChoice(BufferedReader br) throws IOException {
+    private String readWeaponChoice(BufferedReader bufferedReader) throws IOException {
         try {
-            return br.readLine();
+            return bufferedReader.readLine();
         } catch (IOException ioe) {
             throw new IOException("IO error trying to read your weapon!");
         }
