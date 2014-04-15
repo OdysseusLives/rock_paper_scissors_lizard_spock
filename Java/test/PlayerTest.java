@@ -1,6 +1,5 @@
 import factory.Weapon;
 import factory.WeaponFactory;
-import factory.WeaponType;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -8,6 +7,8 @@ import org.junit.rules.ExpectedException;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import static factory.WeaponType.PAPER;
+import static factory.WeaponType.SCISSORS;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -20,8 +21,8 @@ public class PlayerTest {
     @Test
     public void aPlayerKnowsTheirCurrentWeapon() {
         Player player = new Player();
-        player.setWeapon(WeaponFactory.buildWeapon(WeaponType.SCISSORS));
-        assertThat(player.getWeapon().thisWeaponType(), is(WeaponType.SCISSORS));
+        player.setWeapon(WeaponFactory.buildWeapon(SCISSORS));
+        assertThat(player.getWeapon().thisWeaponType(), is(SCISSORS));
     }
 
     @Test
@@ -51,7 +52,7 @@ public class PlayerTest {
         Player player = new Player();
         player.chooseWeapon(br);
 
-        assertThat(player.getWeapon().thisWeaponType(), is(WeaponType.PAPER));
+        assertThat(player.getWeapon().thisWeaponType(), is(PAPER));
     }
 
     @Test

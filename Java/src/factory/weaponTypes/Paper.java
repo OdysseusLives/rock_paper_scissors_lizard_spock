@@ -7,23 +7,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static factory.WeaponType.*;
 import static java.util.Arrays.asList;
 
 public class Paper extends Weapon {
     public WeaponType thisWeaponType() {
-        return WeaponType.PAPER;
+        return PAPER;
     }
 
     protected List<WeaponType> weaponsThatIBeat() {
-        return asList(WeaponType.ROCK, WeaponType.SPOCK);
+        return asList(ROCK, SPOCK);
     }
 
     protected Map<WeaponType, String> technique() {
         Map<WeaponType, String> destruction = new TreeMap<>();
-        destruction.put(WeaponType.SCISSORS, "is cut by");
-        destruction.put(WeaponType.ROCK, "covers");
-        destruction.put(WeaponType.LIZARD, "is eaten by");
-        destruction.put(WeaponType.SPOCK, "disproves");
+        destruction.put(SCISSORS, "is cut by");
+        destruction.put(ROCK, "covers");
+        destruction.put(LIZARD, "is eaten by");
+        destruction.put(SPOCK, "disproves");
         return destruction;
     }
 }

@@ -2,10 +2,10 @@ package factory.weaponTypes;
 
 import factory.Weapon;
 import factory.WeaponFactory;
-import factory.WeaponType;
 import org.junit.Before;
 import org.junit.Test;
 
+import static factory.WeaponType.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -14,46 +14,46 @@ public class SpockTest {
 
     @Before
     public void setUp() throws Exception {
-        spock = WeaponFactory.buildWeapon(WeaponType.SPOCK);
+        spock = WeaponFactory.buildWeapon(SPOCK);
     }
 
     @Test
     public void spockBeatsScissors() {
-        assertThat(spock.determineWinner(WeaponType.SCISSORS), is(WeaponType.SPOCK));
+        assertThat(spock.determineWinner(SCISSORS), is(SPOCK));
     }
 
     @Test
     public void spockDoesNotBeatPaper() {
-        assertThat(spock.determineWinner(WeaponType.PAPER), is(WeaponType.PAPER));
+        assertThat(spock.determineWinner(PAPER), is(PAPER));
     }
 
     @Test
     public void spockBeatsRock() {
-        assertThat(spock.determineWinner(WeaponType.ROCK), is(WeaponType.SPOCK));
+        assertThat(spock.determineWinner(ROCK), is(SPOCK));
     }
 
     @Test
     public void spockDoesNotBeatLizard() {
-        assertThat(spock.determineWinner(WeaponType.LIZARD), is(WeaponType.LIZARD));
+        assertThat(spock.determineWinner(LIZARD), is(LIZARD));
     }
 
     @Test
     public void spockSmashesScissors() {
-        assertThat(spock.attack(WeaponType.SCISSORS), is("SPOCK smashes SCISSORS."));
+        assertThat(spock.attack(SCISSORS), is("SPOCK smashes SCISSORS."));
     }
 
     @Test
     public void spockIsDisprovedByPaper() {
-        assertThat(spock.attack(WeaponType.PAPER), is("SPOCK is disproved by PAPER."));
+        assertThat(spock.attack(PAPER), is("SPOCK is disproved by PAPER."));
     }
 
     @Test
     public void spockIsVaporizedBySpock() {
-        assertThat(spock.attack(WeaponType.ROCK), is("SPOCK vaporizes ROCK."));
+        assertThat(spock.attack(ROCK), is("SPOCK vaporizes ROCK."));
     }
 
     @Test
     public void spockCrushesLizard() {
-        assertThat(spock.attack(WeaponType.LIZARD), is("SPOCK is poisoned by LIZARD."));
+        assertThat(spock.attack(LIZARD), is("SPOCK is poisoned by LIZARD."));
     }
 }
