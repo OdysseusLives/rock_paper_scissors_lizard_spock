@@ -12,7 +12,7 @@ import static java.util.Arrays.asList;
 
 public class Spock extends Weapon {
 
-    public WeaponType thisWeaponType() {
+    public WeaponType type() {
         return SPOCK;
     }
 

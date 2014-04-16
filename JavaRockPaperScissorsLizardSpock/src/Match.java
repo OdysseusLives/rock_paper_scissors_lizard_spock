@@ -13,18 +13,19 @@ public class Match {
     }
 
     public String results() {
-        String message = "You chose " + personWeapon.thisWeaponType() + ".\n";
+        String message = "You chose " + personWeapon.type() + ".\n";
         if (isAStalemate())
             return message + STALEMATE;
         return message + winningMessage();
     }
 
     private boolean isAStalemate() {
-        return personWeapon.thisWeaponType().equals(machineWeapon.thisWeaponType());
+        return personWeapon.type().equals(machineWeapon.type());
     }
 
     private String winningMessage() {
-        return personWeapon.attack(machineWeapon.thisWeaponType()) + "\n" +
-                personWeapon.determineWinner(machineWeapon.thisWeaponType()) + " wins.";
+        return personWeapon.attack(machineWeapon.type()) + "\n" +
+                personWeapon.determineWinner(machineWeapon.type()) + " wins.";
     }
+
 }

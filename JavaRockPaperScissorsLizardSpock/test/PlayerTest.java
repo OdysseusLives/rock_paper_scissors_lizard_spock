@@ -22,7 +22,7 @@ public class PlayerTest {
     public void aPlayerKnowsTheirCurrentWeapon() {
         Player player = new Player();
         player.setWeapon(WeaponFactory.buildWeapon(SCISSORS));
-        assertThat(player.getWeapon().thisWeaponType(), is(SCISSORS));
+        assertThat(player.getWeapon().type(), is(SCISSORS));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class PlayerTest {
         Player player = new Player();
         player.chooseWeapon(br);
 
-        assertThat(player.getWeapon().thisWeaponType(), is(PAPER));
+        assertThat(player.getWeapon().type(), is(PAPER));
     }
 
     @Test

@@ -11,7 +11,7 @@ import static factory.WeaponType.*;
 import static java.util.Arrays.asList;
 
 public class Lizard extends Weapon {
-    public WeaponType thisWeaponType() {
+    public WeaponType type() {
         return LIZARD;
     }
 

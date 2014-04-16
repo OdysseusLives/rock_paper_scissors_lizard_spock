@@ -12,7 +12,7 @@ import static java.util.Arrays.asList;
 
 public class Rock extends Weapon {
 
-    public WeaponType thisWeaponType() {
+    public WeaponType type() {
         return ROCK;
     }
 

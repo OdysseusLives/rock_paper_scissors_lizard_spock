@@ -8,16 +8,16 @@ import java.util.Map;
 @Data
 public abstract class Weapon {
 
-    public abstract WeaponType thisWeaponType();
+    public abstract WeaponType type();
 
     public WeaponType determineWinner(WeaponType weaponType) {
         if (weaponsThatIBeat().contains(weaponType))
-            return thisWeaponType();
+            return type();
         return weaponType;
     }
 
     public String attack(WeaponType weaponType) {
-        return String.format("%s %s %s.", thisWeaponType(), technique().get(weaponType), weaponType);
+        return String.format("%s %s %s.", type(), technique().get(weaponType), weaponType);
     }
 
     protected abstract List<WeaponType> weaponsThatIBeat();
