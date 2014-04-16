@@ -71,7 +71,7 @@ public class PlayerTest {
     @Test
     public void throwsExceptionWhenInvalidWeaponIsEntered() throws EnumConstantNotPresentException, IOException {
         thrown.expect(EnumConstantNotPresentException.class);
-        thrown.expectMessage("Invalid weapon choice!");
+        thrown.expectMessage("giraffe is an invalid weapon choice!");
 
         BufferedReader br = mock(BufferedReader.class);
         when(br.readLine()).thenReturn("giraffe");

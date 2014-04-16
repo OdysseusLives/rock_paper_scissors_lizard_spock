@@ -23,7 +23,7 @@ public class Player {
             WeaponType weaponType = WeaponType.valueOf(weaponChoice.toUpperCase());
             return WeaponFactory.buildWeapon(weaponType);
         } catch (Exception e) {
-            throw new EnumConstantNotPresentException(WeaponType.class, "Invalid weapon choice!");
+            throw new EnumConstantNotPresentException(WeaponType.class, weaponChoice + " is an invalid weapon choice!");
         }
     }
 
