@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: GreetingPlugin
 
 repositories {
@@ -23,6 +24,12 @@ sourceSets {
             srcDir 'test'
         }
     }
+}
+
+mainClassName = "Main"
+
+run {
+    standardInput = System.in
 }
 
 class GreetingPlugin implements Plugin<Project> {
