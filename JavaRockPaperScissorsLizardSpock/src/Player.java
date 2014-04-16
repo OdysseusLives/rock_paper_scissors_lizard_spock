@@ -8,23 +8,28 @@ import java.io.IOException;
 
 @Data
 public class Player {
-    Weapon weapon;
+    private Weapon weapon;
 
     public void generateWeapon() {
         this.setWeapon(WeaponFactory.buildWeapon(WeaponType.getRandomWeapon()));
     }
 
     public void chooseWeapon(BufferedReader bufferedReader) throws IOException {
-        setWeapon(returnWeaponChoice(readWeaponChoice(bufferedReader)));
+        setWeaponChoice(readWeaponChoice(bufferedReader), bufferedReader);
     }
 
-    private Weapon returnWeaponChoice(String weaponChoice)  {
+    private void setWeaponChoice(String weaponChoice, BufferedReader bufferedReader) throws IOException {
         try {
             WeaponType weaponType = WeaponType.valueOf(weaponChoice.toUpperCase());
-            return WeaponFactory.buildWeapon(weaponType);
+            setWeapon(WeaponFactory.buildWeapon(weaponType));
         } catch (Exception e) {
-            throw new EnumConstantNotPresentException(WeaponType.class, weaponChoice + " is an invalid weapon choice!");
+            System.out.println(invalidWeaponMessage(weaponChoice));
+            chooseWeapon(bufferedReader);
         }
+    }
+
+    private String invalidWeaponMessage(String weaponChoice) {
+        return weaponChoice + " is an invalid weapon choice!  Enter a different weapon.";
     }
 
     private String readWeaponChoice(BufferedReader bufferedReader) throws IOException {
